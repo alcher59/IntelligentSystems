@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpecialEquipment"
         mc:Ignorable="d"
-        Title="SpecialEquipment" Height="700" Width="1000" Foreground="Black" BorderBrush="Black">
-    <Grid>
+        Title="Спецтехника" Height="888.797" Width="1396.526" Foreground="Black" BorderBrush="Black" FontFamily="Segoe Print" FontSize="14">
+    <Grid Margin="0,0,-8,0">
         <Grid.Background>
             <ImageBrush ImageSource="bay.jpg"/>
         </Grid.Background>
-        <GroupBox Header="Добавить объект" HorizontalAlignment="Left" Height="404" Margin="555,133,0,0" VerticalAlignment="Top" Width="415" Background="#FFFACE09" BorderBrush="Black" FontSize="16" BorderThickness="2" FontFamily="Segoe Print">
+        <GroupBox Header="Новый объект" HorizontalAlignment="Left" Height="425" Margin="810,166,0,0" VerticalAlignment="Top" Width="414" Background="#FFFACE09" BorderBrush="Black" FontSize="16" BorderThickness="2" FontFamily="Segoe Print">
             <Grid HorizontalAlignment="Left" Height="344" Margin="10,10,-2,0" VerticalAlignment="Top" Width="395">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0*"/>
@@ -39,10 +39,16 @@
                 <CheckBox x:Name="tank_check" Content="Цистерна" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="6" Grid.ColumnSpan="2" Height="22" Width="106" FontSize="14"/>
                 <CheckBox x:Name="jib_check" Content="Стрела" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="7" Grid.ColumnSpan="2" Height="22" Width="85" FontSize="14"/>
                 <CheckBox x:Name="outriggers_check" Content="Выносные опоры" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="8" Grid.ColumnSpan="2" ForceCursor="True" Height="22" Width="158" FontSize="14"/>
-                <Button Content="Принять" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Width="366" Height="30" Background="White" FontSize="16" BorderBrush="Black" FontWeight="Bold" BorderThickness="0" FontFamily="Segoe Print" Grid.ColumnSpan="3" Grid.Row="9"/>
+                <Button Content="Сравнить" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Width="366" Height="30" Background="White" FontSize="16" BorderBrush="Black" FontWeight="Bold" BorderThickness="0" FontFamily="Segoe Print" Grid.ColumnSpan="3" Grid.Row="9" Click="Button_Click"/>
             </Grid>
         </GroupBox>
-        <DataGrid HorizontalAlignment="Left" Height="404" Margin="29,133,0,0" VerticalAlignment="Top" Width="470"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="425" Margin="138,166,0,0" VerticalAlignment="Top" Width="477"/>
+        <TextBlock HorizontalAlignment="Left" Margin="29,626,0,0" TextWrapping="Wrap" Text="Похоже на:" VerticalAlignment="Top" Width="109"/>
+        <TextBlock x:Name="result_TextBlock" HorizontalAlignment="Left" Margin="138,626,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="477" Background="#FFFACE09"/>
+        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="1397" Background="White">
+            <MenuItem Header="Открыть" Click="MenuItem_Click"/>
+            <MenuItem Header="Сохранить" Click="MenuItem_Click_1"/>
+        </Menu>
 
     </Grid>
 </Window>
