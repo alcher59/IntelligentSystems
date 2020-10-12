@@ -122,7 +122,7 @@ namespace SpecialEquipment
                 for (int num = 0; num < 6; num++)
                 {
                     if (arr[num] == max)
-                        maxNumbers.Append(num);  //номера объектов, на которые похож новый объект
+                        maxNumbers.Add(num);  //номера объектов, на которые похож новый объект
                 }
             }
             
@@ -130,11 +130,13 @@ namespace SpecialEquipment
             //int resNum = 0;
             List<int> resNums = new List<int>();
             int[] countsObj = new int[6];
-
-            for(int c = 0; c < countsObj.Length; c++)
+            int no = 0;
+            foreach (int val in maxNumbers.Distinct())
             {
-                countsObj[c] = maxNumbers.Select(x => x.Equals(c+1)).ToList().Count; //кол-во объектов каждого вида, на которые похож новый объект
+                countsObj[no] = maxNumbers.Where(x => x == val).Count();
+                no++;
             }
+            
             int maxCounts = countsObj.Max();
             for (int c = 0; c < countsObj.Length; c++)
             {
