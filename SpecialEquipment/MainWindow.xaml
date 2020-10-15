@@ -5,20 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpecialEquipment"
         mc:Ignorable="d"
-        Title="Спецтехника" Height="888.797" Width="1396.526" Foreground="Black" BorderBrush="Black" FontFamily="Segoe Print" FontSize="14">
-    <Grid Margin="0,0,-8,0">
+        Title="Спецтехника" Height="888.797" Width="1763.351" Foreground="Black" BorderBrush="Black" FontFamily="Segoe Print" FontSize="14" MouseDown="Window_MouseDown">
+
+    <Grid x:Name="grid" Margin="0,0,2,0" ForceCursor="True">
         <Grid.Background>
             <ImageBrush ImageSource="bay.jpg"/>
         </Grid.Background>
-        <GroupBox Header="Новый объект" HorizontalAlignment="Left" Height="425" Margin="810,166,0,0" VerticalAlignment="Top" Width="414" Background="#FFFACE09" BorderBrush="Black" FontSize="16" BorderThickness="2" FontFamily="Segoe Print">
-            <Grid HorizontalAlignment="Left" Height="344" Margin="10,10,-2,0" VerticalAlignment="Top" Width="395">
+        <GroupBox Header="Новый объект" HorizontalAlignment="Left" Height="449" Margin="588,139,0,0" VerticalAlignment="Top" Width="366" Background="#FFFACE09" BorderBrush="Black" FontSize="16" BorderThickness="2" FontFamily="Segoe Print">
+            <Grid Margin="0,54,169,0" HorizontalAlignment="Right" Width="175" Height="344" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0*"/>
-                    <ColumnDefinition Width="56*"/>
-                    <ColumnDefinition Width="23*"/>
+                    <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -39,16 +37,39 @@
                 <CheckBox x:Name="tank_check" Content="Цистерна" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="6" Grid.ColumnSpan="2" Height="22" Width="106" FontSize="14"/>
                 <CheckBox x:Name="jib_check" Content="Стрела" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="7" Grid.ColumnSpan="2" Height="22" Width="85" FontSize="14"/>
                 <CheckBox x:Name="outriggers_check" Content="Выносные опоры" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="8" Grid.ColumnSpan="2" ForceCursor="True" Height="22" Width="158" FontSize="14"/>
-                <Button Content="Сравнить" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Width="366" Height="30" Background="White" FontSize="16" BorderBrush="Black" FontWeight="Bold" BorderThickness="0" FontFamily="Segoe Print" Grid.ColumnSpan="3" Grid.Row="9" Click="Button_Click"/>
             </Grid>
         </GroupBox>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="425" Margin="138,166,0,0" VerticalAlignment="Top" Width="477"/>
-        <TextBlock HorizontalAlignment="Left" Margin="29,626,0,0" TextWrapping="Wrap" Text="Похоже на:" VerticalAlignment="Top" Width="109"/>
-        <TextBlock x:Name="result_TextBlock" HorizontalAlignment="Left" Margin="138,626,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="477" Background="#FFFACE09"/>
-        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="1397" Background="White">
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="310" Margin="10,140,0,0" VerticalAlignment="Top" Width="544">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title1" Binding="{Binding Title1}" />
+                <DataGridTextColumn Header="Title2" Binding="{Binding Title2}" />
+                <DataGridTextColumn Header="Title3" Binding="{Binding Title3}" />
+                <DataGridTextColumn Header="Title4" Binding="{Binding Title4}" />
+                <DataGridTextColumn Header="Title5" Binding="{Binding Title5}" />
+                <DataGridTextColumn Header="Title6" Binding="{Binding Title6}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,468,0,0" TextWrapping="Wrap" Text="Похоже на:" VerticalAlignment="Top" Width="109"/>
+        <TextBlock x:Name="result_TextBlock" HorizontalAlignment="Left" Margin="124,468,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="430" Background="#FFFACE09"/>
+        <Menu Height="20" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" Width="1753">
             <MenuItem Header="Открыть" Click="MenuItem_Click"/>
             <MenuItem Header="Сохранить" Click="MenuItem_Click_1"/>
         </Menu>
+        <TextBox x:Name="txtBox_name" Height="32" Margin="0,184,827,0" TextWrapping="Wrap"  MouseEnter="txtBox_name_MouseEnter" MouseLeave="txtBox_name_MouseLeave" Width="314" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        <Button x:Name="btn_comp" Content="Сравнить" HorizontalAlignment="Left" Margin="588,593,0,0" VerticalAlignment="Top" Width="177" Height="33" Background="White" Click="btn_comp_Click"/>
+        <Button x:Name="btn_add" Content="Добавить" HorizontalAlignment="Left" Margin="777,593,0,0" VerticalAlignment="Top" Width="177
+                " Height="33" Background="White" Click="btn_add_Click"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="448" Margin="991,140,0,0" VerticalAlignment="Top" Width="482">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Path=Name}" Width="241"/>
+                    <GridViewColumn Header="Свойства" DisplayMemberBinding="{Binding Path=Properties}" Width="241" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btn_clear" Content="Очистить" HorizontalAlignment="Left" Margin="1323,631,0,0" VerticalAlignment="Top" Width="150" Height="34" Background="White" Click="btn_clear_Click"/>
+        <Button x:Name="btn_teach" Content="Обучить" HorizontalAlignment="Left" Margin="991,593,0,0" VerticalAlignment="Top" Width="327" Height="33" Background="White" IsEnabled="False"/>
+        <Button x:Name="btn_remove" Content="Удалить" HorizontalAlignment="Left" Margin="1323,593,0,0" VerticalAlignment="Top" Width="150" Height="33" Background="White" Click="btn_remove_Click"/>
 
     </Grid>
 </Window>
