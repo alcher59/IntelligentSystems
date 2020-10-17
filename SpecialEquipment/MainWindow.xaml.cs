@@ -21,19 +21,20 @@ namespace SpecialEquipment
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<ListObjects> listObjects = new List<ListObjects>();
+        List<ListObjects> listObjects = new List<ListObjects>();
+        List<ListViewObjects> listViewObjects = new List<ListViewObjects>();
         const int propertyCount = 9;
         int[,] tmatr;
+
         public MainWindow()
         {
             InitializeComponent();
            
             txtBox_name.Text = "Введите название..";
-
-            var propList = FillProperties(); 
-            var nameList = FillNames();
-            var matr = CreateMatrix(propList);
-            tmatr = TeachMatrix(propList, matr);
+            var props = FillProperties();
+            var names = FillNames();
+            var matr = CreateMatrix(props);
+            tmatr = TeachMatrix(props, matr);
 
             List<Obj> objects = new List<Obj>();
             for (int i = 0; i < propertyCount; i++)
@@ -59,7 +60,7 @@ namespace SpecialEquipment
         }
 
 
-        public List<int[]> FillProperties(/*List<int[]> newList*/)
+        public List<int[]> FillProperties()
         {
             List<int[]> list = new List<int[]>();
             //двс, колеса, гусеницы, ковш, бур, кузов, цистерна, стрела, выносные опоры
@@ -73,7 +74,7 @@ namespace SpecialEquipment
             return list;
         }
 
-        public List<string> FillNames(/*List<string> newList*/)
+        public List<string> FillNames()
         {
             List<string> list = new List<string>();
             list.Add("Самосвал");
@@ -121,6 +122,7 @@ namespace SpecialEquipment
                     }
             return matrix;
         }
+
         public string CompareObjects(int[] obj)
         {
             int[] arr = new int[6];
@@ -160,33 +162,36 @@ namespace SpecialEquipment
             {
                 if (countsObj[c] == maxCounts)
                 {
-                    if (result != "")
-                        result += "/";
                     switch (countsObj[c])
                     {
                         case 1:
-                            result += "Самосвал";
+                            if(!result.Contains("Самосвал"))
+                                result += "/Самосвал";
                             break;
                         case 2:
-                            result += "Бензовоз";
+                            if (!result.Contains("Бензовоз"))
+                                result += "/Бензовоз";
                             break;
                         case 3:
-                            result += "Кран-борт";
+                            if (!result.Contains("Кран-борт"))
+                                result += "/Кран-борт";
                             break;
                         case 4:
-                            result += "Бульдозер";
+                            if (!result.Contains("Бульдозер"))
+                                result += "/Бульдозер";
                             break;
                         case 5:
-                            result += "Экскаватор";
+                            if (!result.Contains("Экскаватор"))
+                                result += "/Экскаватор";
                             break;
                         case 6:
-                            result += "Бурильная машина";
+                            if (!result.Contains("Бурильная машина"))
+                                result += "/Бурильная машина";
                             break;
                     }
-                    
                 }
             }
-
+            result = result.Remove(0, 1);
             return result;
         }
 
@@ -205,6 +210,7 @@ namespace SpecialEquipment
             };
             return obj;
         }
+
         public class Obj
         {
             public string Title1 { get; set; }
@@ -218,7 +224,109 @@ namespace SpecialEquipment
         public class ListObjects
         {
             public string Name { get; set; }
+            public int[] Properties { get; set; }
+        }
+
+        public class ListViewObjects
+        {
+            public string Name { get; set; }
             public string Properties { get; set; }
+        }
+
+        private void btn_teach_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_add_Click(object sender, RoutedEventArgs e)
+        {
+            if (listObjects.Count < 6)
+            {
+                if (listObjects.FirstOrDefault(x => x.Name == txtBox_name.Text) == null)
+                {
+                    var newProps = GetObjectProperties();
+
+                    string properties = "";
+
+                    foreach (int i in newProps)
+                    {
+                        properties += i.ToString() + "-";
+                    }
+
+                    properties = properties.Remove(17, 1);
+
+                    if (listViewObjects.FirstOrDefault(x => x.Properties == properties) == null)
+                    {
+                        var newObj = new ListObjects()
+                        {
+                            Name = txtBox_name.Text,
+                            Properties = newProps
+                        };
+
+                        var newViewObj = new ListViewObjects()
+                        {
+                            Name = txtBox_name.Text,
+                            Properties = properties
+                        };
+
+                        listObjects.Add(newObj);
+                        listViewObjects.Add(newViewObj);
+                        listView.Items.Add(newViewObj);
+
+                        if (listObjects.Count == 6)
+                            btn_teach.IsEnabled = true;
+                    }
+                    else
+                        MessageBox.Show("Введите дргуие параметры!", "Ошибка");
+                }
+                else
+                    MessageBox.Show("Введите другое название!", "Ошибка");
+            }
+            else
+                MessageBox.Show("Достигнуто максимальное кол-во объектов!\n\nОчистите список или обучите матрицу.", "Ошибка");
+        }
+
+        private void btn_comp_Click(object sender, RoutedEventArgs e)
+        {
+            var obj = GetObjectProperties();
+            result_TextBlock.Text = CompareObjects(obj);
+        }
+
+        private void btn_remove_Click(object sender, RoutedEventArgs e)
+        {
+            if(listView.SelectedItem != null)
+            {
+                ListObjects item = (ListObjects)listView.SelectedItem;
+                foreach (var obj in listObjects)
+                {
+                    if (obj.Name == item.Name)
+                    {
+                        listObjects.Remove(obj);
+                        break;
+                    }
+                }
+                ListViewObjects itemView = (ListViewObjects)listView.SelectedItem;
+                foreach (var obj in listViewObjects)
+                {
+                    if (obj.Name == itemView.Name)
+                    {
+                        listViewObjects.Remove(obj);
+                        break;
+                    }
+                }
+                listView.Items.Remove(itemView);
+                if (listObjects.Count != 6)
+                    btn_teach.IsEnabled = false;
+            }
+        }
+
+        private void btn_clear_Click(object sender, RoutedEventArgs e)
+        {
+            listObjects.Clear();
+            listViewObjects.Clear();
+            listView.Items.Clear();
+            if (listObjects.Count != 6)
+                btn_teach.IsEnabled = false;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -232,7 +340,7 @@ namespace SpecialEquipment
         }
 
 
-        
+
         private void txtBox_name_MouseEnter(object sender, MouseEventArgs e)
         {
             if (txtBox_name.Text == "Введите название..")
@@ -267,62 +375,6 @@ namespace SpecialEquipment
             }
         }
 
-        private void btn_add_Click(object sender, RoutedEventArgs e)
-        {
-            if (listObjects.Count < 6)
-            {
-                var newProp = GetObjectProperties();
-
-                string properties = "";
-
-                foreach (int i in newProp)
-                {
-                    properties += i.ToString() + "-";
-                }
-
-                var newObj = new ListObjects()
-                {
-                    Name = txtBox_name.Text,
-                    Properties = properties.Remove(17, 1)
-                };
-
-                listObjects.Add(newObj);
-                listView.Items.Add(newObj);
-
-                if (listObjects.Count == 6)
-                    btn_teach.IsEnabled = true;
-            }
-            else
-                MessageBox.Show("Достигнуто максимальное кол-во объектов!\n\nОчистите список или обучите матрицу.", "Ошибка");
-        }
-
-        private void btn_comp_Click(object sender, RoutedEventArgs e)
-        {
-            var obj = GetObjectProperties();
-            result_TextBlock.Text = CompareObjects(obj);
-        }
-
-        private void btn_remove_Click(object sender, RoutedEventArgs e)
-        {
-            if(listView.SelectedItem != null)
-            {
-                ListObjects item = (ListObjects)listView.SelectedItem;
-                foreach (var obj in listObjects)
-                {
-                    if (obj.Name == item.Name)
-                    {
-                        listObjects.Remove(obj);
-                        break;
-                    }
-                }
-                listView.Items.Remove(item);
-            }
-        }
-
-        private void btn_clear_Click(object sender, RoutedEventArgs e)
-        {
-            listObjects.Clear();
-            listView.Items.Clear();
-        }
+        
     }
 }

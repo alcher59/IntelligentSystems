@@ -68,7 +68,7 @@
             </ListView.View>
         </ListView>
         <Button x:Name="btn_clear" Content="Очистить" HorizontalAlignment="Left" Margin="1323,631,0,0" VerticalAlignment="Top" Width="150" Height="34" Background="White" Click="btn_clear_Click"/>
-        <Button x:Name="btn_teach" Content="Обучить" HorizontalAlignment="Left" Margin="991,593,0,0" VerticalAlignment="Top" Width="327" Height="33" Background="White" IsEnabled="False"/>
+        <Button x:Name="btn_teach" Content="Обучить" HorizontalAlignment="Left" Margin="991,593,0,0" VerticalAlignment="Top" Width="327" Height="33" Background="White" IsEnabled="False" Click="btn_teach_Click"/>
         <Button x:Name="btn_remove" Content="Удалить" HorizontalAlignment="Left" Margin="1323,593,0,0" VerticalAlignment="Top" Width="150" Height="33" Background="White" Click="btn_remove_Click"/>
 
     </Grid>
