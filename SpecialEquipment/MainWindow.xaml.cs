@@ -31,59 +31,55 @@ namespace SpecialEquipment
             InitializeComponent();
            
             txtBox_name.Text = "Введите название..";
-            var props = FillProperties();
-            var names = FillNames();
+            InitObjects();
+            var props = listObjects.Select(x => x.Properties).ToList();
             var matr = CreateMatrix(props);
             tmatr = TeachMatrix(props, matr);
+            PrintMatr(tmatr);
+        }
 
+        public void PrintMatr(int[,] matr)
+        {
+            dataGrid.Items.Clear();
             List<Obj> objects = new List<Obj>();
             for (int i = 0; i < propertyCount; i++)
             {
                 objects.Add(new Obj
                 {
-                    Title1 = tmatr[i, 0].ToString(),
-                    Title2 = tmatr[i, 1].ToString(),
-                    Title3 = tmatr[i, 2].ToString(),
-                    Title4 = tmatr[i, 3].ToString(),
-                    Title5 = tmatr[i, 4].ToString(),
-                    Title6 = tmatr[i, 5].ToString(),
+                    Title1 = matr[i, 0].ToString(),
+                    Title2 = matr[i, 1].ToString(),
+                    Title3 = matr[i, 2].ToString(),
+                    Title4 = matr[i, 3].ToString(),
+                    Title5 = matr[i, 4].ToString(),
+                    Title6 = matr[i, 5].ToString(),
                 });
                 dataGrid.Items.Add(objects[i]);
             }
 
-            dataGrid.Columns[0].Header = "Самосвал";
-            dataGrid.Columns[1].Header = "Бензовоз";
-            dataGrid.Columns[2].Header = "Кран-борт";
-            dataGrid.Columns[3].Header = "Бульдозер";
-            dataGrid.Columns[4].Header = "Экскаватор";
-            dataGrid.Columns[5].Header = "Бурмашина";
+            var headers = listObjects.Select(x => x.Name).ToList();
+            for(int i = 0; i < headers.Count; i++)
+            {
+                dataGrid.Columns[i].Header = headers[i];
+            }
         }
-
-
-        public List<int[]> FillProperties()
+        public void InitObjects()
         {
-            List<int[]> list = new List<int[]>();
             //двс, колеса, гусеницы, ковш, бур, кузов, цистерна, стрела, выносные опоры
-            list.Add(new int[propertyCount] { 1, 1, 0, 0, 0, 1, 0, 0, 0 }); //"Самосвал"
-            list.Add(new int[propertyCount] { 1, 1, 0, 0, 0, 0, 1, 0, 0 }); //"Бензовоз"
-            list.Add(new int[propertyCount] { 1, 0, 0, 0, 0, 1, 0, 1, 1 }); //"Кран-борт" 
-            list.Add(new int[propertyCount] { 1, 0, 1, 1, 0, 0, 0, 0, 0 }); //"Бульдозер"
-            list.Add(new int[propertyCount] { 1, 0, 1, 1, 0, 0, 0, 1, 0 }); //"Экскаватор"
-            list.Add(new int[propertyCount] { 1, 1, 0, 0, 1, 0, 0, 0, 1 }); //"Бурильная машина"
+            listObjects.Add(new ListObjects(){ Name = "Самосвал", Properties = new int[propertyCount] { 1, 1, 0, 0, 0, 1, 0, 0, 0 } });
+            listObjects.Add(new ListObjects(){ Name = "Бензовоз", Properties = new int[propertyCount] { 1, 1, 0, 0, 0, 0, 1, 0, 0 } });
+            listObjects.Add(new ListObjects(){ Name = "Кран-борт", Properties = new int[propertyCount] { 1, 1, 0, 0, 0, 1, 0, 1, 1 } });
+            listObjects.Add(new ListObjects(){ Name = "Бульдозер", Properties = new int[propertyCount] { 1, 0, 1, 1, 0, 0, 0, 0, 0 } });
+            listObjects.Add(new ListObjects(){ Name = "Экскаватор", Properties = new int[propertyCount] { 1, 0, 1, 1, 0, 0, 0, 1, 0 } });
+            listObjects.Add(new ListObjects(){ Name = "Бурильная машина", Properties = new int[propertyCount] { 1, 0, 1, 0, 1, 0, 0, 0, 1 } });
 
-            return list;
-        }
-
-        public List<string> FillNames()
-        {
-            List<string> list = new List<string>();
-            list.Add("Самосвал");
-            list.Add("Бензовоз");
-            list.Add("Кран-борт");
-            list.Add("Бульдозер");
-            list.Add("Экскаватор");
-            list.Add("Бурильная машина");
-            return list;
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[0].Name, Properties = "1-1-0-0-0-1-0-0-0" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[1].Name, Properties = "1-1-0-0-0-0-1-0-0" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[2].Name, Properties = "1-1-0-0-0-1-0-1-1" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[3].Name, Properties = "1-0-1-1-0-0-0-0-0" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[4].Name, Properties = "1-0-1-1-0-0-0-1-0" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[5].Name, Properties = "1-0-1-0-1-0-0-0-1" });
+            foreach (var obj in listViewObjects)
+                listView.Items.Add(obj);
         }
 
         public int[,] CreateMatrix(List<int[]> list)
@@ -97,98 +93,81 @@ namespace SpecialEquipment
             return matrix;
         }
 
-        public int[,] TeachMatrix(List<int[]> list, int[,] matrix)
+        public int[,] TeachMatrix(List<int[]> props, int[,] matr)
         {
-            for (int key = 0; key < list.Count; key++)
+            for (int key = 0; key < props.Count; key++)
                 for (int i = 0; i < propertyCount; i++)
-                    for (int j = 0; j < list.Count; j++)
+                    for (int j = 0; j < props.Count; j++)
                     {
                         if (j == key)
                         {
-                            matrix[i, j] += list[j][i];
-                            if (matrix[i, j] < -1)
-                                matrix[i, j] = -1;
-                            if (matrix[i, j] > 1)
-                                matrix[i, j] = 1;
+                            matr[i, j] += props[key][i];
+                            if (matr[i, j] < -1)
+                                matr[i, j] = -1;
+                            if (matr[i, j] > 1)
+                                matr[i, j] = 1;
                         }
                         else
                         {
-                            matrix[i, j] -= list[j][i];
-                            if (matrix[i, j] < -1)
-                                matrix[i, j] = -1;
-                            if (matrix[i, j] > 1)
-                                matrix[i, j] = 1;
+                            matr[i, j] -= props[key][i];
+                            if (matr[i, j] < -1)
+                                matr[i, j] = -1;
+                            if (matr[i, j] > 1)
+                                matr[i, j] = 1;
                         }
                     }
-            return matrix;
+            return matr;
         }
 
-        public string CompareObjects(int[] obj)
+        public string CompareObjects(int[] y)
         {
-            int[] arr = new int[6];
+            int[] demons = new int[6];
             List<int> maxNumbers = new List<int>();
             string result = "";
-            int max = 0;
+            string text = "";
             for (int i = 0; i < 6; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    arr[i] += tmatr[j, i] * obj[i];
+                    demons[i] += tmatr[j, i] * y[j];
                 }
-                max = arr.Max();  //максимальное число для определения объекта
-                
-                //int num = 0;
-               
-                for (int num = 0; num < 6; num++)
-                {
-                    if (arr[num] == max)
-                        maxNumbers.Add(num);  //номера объектов, на которые похож новый объект
-                }
+                text += $"{demons[i]}, ";
+            }
+            demons_TextBlock.Text = text.Substring(0, text.Length - 2);
+            for (int num = 0; num < 6; num++)
+            {
+                if (demons[num] == demons.Max())
+                    maxNumbers.Add(num);  //номера объектов, на которые похож новый объект
             }
             
-            //int n = 1;
-            //int resNum = 0;
-            List<int> resNums = new List<int>();
-            int[] countsObj = new int[6];
-            int no = 0;
-            foreach (int val in maxNumbers.Distinct())
+            for (int c = 0; c < maxNumbers.Count; c++)
             {
-                countsObj[no] = maxNumbers.Where(x => x == val).Count();
-                no++;
-            }
-            
-            int maxCounts = countsObj.Max();
-            for (int c = 0; c < countsObj.Length; c++)
-            {
-                if (countsObj[c] == maxCounts)
+                switch (maxNumbers[c])
                 {
-                    switch (countsObj[c])
-                    {
-                        case 1:
-                            if(!result.Contains("Самосвал"))
-                                result += "/Самосвал";
-                            break;
-                        case 2:
-                            if (!result.Contains("Бензовоз"))
-                                result += "/Бензовоз";
-                            break;
-                        case 3:
-                            if (!result.Contains("Кран-борт"))
-                                result += "/Кран-борт";
-                            break;
-                        case 4:
-                            if (!result.Contains("Бульдозер"))
-                                result += "/Бульдозер";
-                            break;
-                        case 5:
-                            if (!result.Contains("Экскаватор"))
-                                result += "/Экскаватор";
-                            break;
-                        case 6:
-                            if (!result.Contains("Бурильная машина"))
-                                result += "/Бурильная машина";
-                            break;
-                    }
+                    case 0:
+                        if (!result.Contains(listObjects[0].Name))
+                            result += "/" + listObjects[0].Name;
+                        break;
+                    case 1:
+                        if (!result.Contains(listObjects[1].Name))
+                            result += "/" + listObjects[1].Name;
+                        break;
+                    case 2:
+                        if (!result.Contains(listObjects[2].Name))
+                            result += "/" + listObjects[2].Name;
+                        break;
+                    case 3:
+                        if (!result.Contains(listObjects[3].Name))
+                            result += "/" + listObjects[3].Name;
+                        break;
+                    case 4:
+                        if (!result.Contains(listObjects[4].Name))
+                            result += "/" + listObjects[4].Name;
+                        break;
+                    case 5:
+                        if (!result.Contains(listObjects[5].Name))
+                            result += "/" + listObjects[5].Name;
+                        break;
                 }
             }
             result = result.Remove(0, 1);
@@ -236,6 +215,10 @@ namespace SpecialEquipment
         private void btn_teach_Click(object sender, RoutedEventArgs e)
         {
 
+            var props = listObjects.Select(x => x.Properties).ToList();
+            var newMatr = CreateMatrix(props);
+            tmatr = TeachMatrix(props, newMatr);
+            PrintMatr(tmatr);
         }
 
         private void btn_add_Click(object sender, RoutedEventArgs e)
@@ -296,7 +279,7 @@ namespace SpecialEquipment
         {
             if(listView.SelectedItem != null)
             {
-                ListObjects item = (ListObjects)listView.SelectedItem;
+                ListViewObjects item = (ListViewObjects)listView.SelectedItem;
                 foreach (var obj in listObjects)
                 {
                     if (obj.Name == item.Name)
@@ -374,7 +357,5 @@ namespace SpecialEquipment
                 txtBox_name.Text = "Введите название..";
             }
         }
-
-        
     }
 }

@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpecialEquipment"
         mc:Ignorable="d"
-        Title="Спецтехника" Height="888.797" Width="1763.351" Foreground="Black" BorderBrush="Black" FontFamily="Segoe Print" FontSize="14" MouseDown="Window_MouseDown">
+        Title="Спецтехника" Height="888.797" Width="1620.851" Foreground="Black" BorderBrush="Black" FontFamily="Segoe Print" FontSize="14" MouseDown="Window_MouseDown">
 
     <Grid x:Name="grid" Margin="0,0,2,0" ForceCursor="True">
         <Grid.Background>
             <ImageBrush ImageSource="bay.jpg"/>
         </Grid.Background>
-        <GroupBox Header="Новый объект" HorizontalAlignment="Left" Height="449" Margin="588,139,0,0" VerticalAlignment="Top" Width="366" Background="#FFFACE09" BorderBrush="Black" FontSize="16" BorderThickness="2" FontFamily="Segoe Print">
+        <GroupBox Header="Новый объект" HorizontalAlignment="Left" Height="449" Margin="716,139,0,0" VerticalAlignment="Top" Width="366" Background="#FFFACE09" BorderBrush="Black" FontSize="16" BorderThickness="2" FontFamily="Segoe Print">
             <Grid Margin="0,54,169,0" HorizontalAlignment="Right" Width="175" Height="344" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*"/>
@@ -39,7 +39,7 @@
                 <CheckBox x:Name="outriggers_check" Content="Выносные опоры" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="8" Grid.ColumnSpan="2" ForceCursor="True" Height="22" Width="158" FontSize="14"/>
             </Grid>
         </GroupBox>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="310" Margin="10,140,0,0" VerticalAlignment="Top" Width="544">
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="415" Margin="10,140,0,0" VerticalAlignment="Top" Width="674">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title1" Binding="{Binding Title1}" />
                 <DataGridTextColumn Header="Title2" Binding="{Binding Title2}" />
@@ -49,17 +49,16 @@
                 <DataGridTextColumn Header="Title6" Binding="{Binding Title6}" />
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,468,0,0" TextWrapping="Wrap" Text="Похоже на:" VerticalAlignment="Top" Width="109"/>
-        <TextBlock x:Name="result_TextBlock" HorizontalAlignment="Left" Margin="124,468,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="430" Background="#FFFACE09"/>
+        <TextBlock HorizontalAlignment="Left" Margin="122,593,0,0" TextWrapping="Wrap" Text="Похоже на:" VerticalAlignment="Top" Width="110"/>
+        <TextBlock x:Name="result_TextBlock" HorizontalAlignment="Left" Margin="236,593,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="430" Background="#FFFACE09"/>
         <Menu Height="20" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" Width="1753">
             <MenuItem Header="Открыть" Click="MenuItem_Click"/>
             <MenuItem Header="Сохранить" Click="MenuItem_Click_1"/>
         </Menu>
-        <TextBox x:Name="txtBox_name" Height="32" Margin="0,184,827,0" TextWrapping="Wrap"  MouseEnter="txtBox_name_MouseEnter" MouseLeave="txtBox_name_MouseLeave" Width="314" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-        <Button x:Name="btn_comp" Content="Сравнить" HorizontalAlignment="Left" Margin="588,593,0,0" VerticalAlignment="Top" Width="177" Height="33" Background="White" Click="btn_comp_Click"/>
-        <Button x:Name="btn_add" Content="Добавить" HorizontalAlignment="Left" Margin="777,593,0,0" VerticalAlignment="Top" Width="177
-                " Height="33" Background="White" Click="btn_add_Click"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="448" Margin="991,140,0,0" VerticalAlignment="Top" Width="482">
+        <TextBox x:Name="txtBox_name" Height="32" Margin="0,181,555,0" TextWrapping="Wrap"  MouseEnter="txtBox_name_MouseEnter" MouseLeave="txtBox_name_MouseLeave" Width="314" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        <Button x:Name="btn_comp" Content="Сравнить" HorizontalAlignment="Left" Margin="716,593,0,0" VerticalAlignment="Top" Width="176" Height="33" Background="White" Click="btn_comp_Click"/>
+        <Button x:Name="btn_add" Content="Добавить" HorizontalAlignment="Left" Margin="904,593,0,0" VerticalAlignment="Top" Width="178" Height="33" Background="White" Click="btn_add_Click"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="448" Margin="1110,140,0,0" VerticalAlignment="Top" Width="482">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Path=Name}" Width="241"/>
@@ -67,9 +66,11 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btn_clear" Content="Очистить" HorizontalAlignment="Left" Margin="1323,631,0,0" VerticalAlignment="Top" Width="150" Height="34" Background="White" Click="btn_clear_Click"/>
-        <Button x:Name="btn_teach" Content="Обучить" HorizontalAlignment="Left" Margin="991,593,0,0" VerticalAlignment="Top" Width="327" Height="33" Background="White" IsEnabled="False" Click="btn_teach_Click"/>
-        <Button x:Name="btn_remove" Content="Удалить" HorizontalAlignment="Left" Margin="1323,593,0,0" VerticalAlignment="Top" Width="150" Height="33" Background="White" Click="btn_remove_Click"/>
+        <Button x:Name="btn_clear" Content="Очистить" HorizontalAlignment="Left" Margin="1442,631,0,0" VerticalAlignment="Top" Width="150" Height="34" Background="White" Click="btn_clear_Click"/>
+        <Button x:Name="btn_teach" Content="Обучить" HorizontalAlignment="Left" Margin="1110,593,0,0" VerticalAlignment="Top" Width="328" Height="33" Background="White" IsEnabled="False" Click="btn_teach_Click"/>
+        <Button x:Name="btn_remove" Content="Удалить" HorizontalAlignment="Left" Margin="1442,593,0,0" VerticalAlignment="Top" Width="150" Height="33" Background="White" Click="btn_remove_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="122,563,0,0" TextWrapping="Wrap" Text="Демоны:" VerticalAlignment="Top" Width="110"/>
+        <TextBlock x:Name="demons_TextBlock" HorizontalAlignment="Left" Margin="236,568,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="430" Background="#FFFACE09"/>
 
     </Grid>
 </Window>
