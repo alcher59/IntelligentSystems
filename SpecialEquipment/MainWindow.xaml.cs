@@ -23,7 +23,8 @@ namespace SpecialEquipment
     {
         List<ListObjects> listObjects = new List<ListObjects>();
         List<ListViewObjects> listViewObjects = new List<ListViewObjects>();
-        const int propertyCount = 9;
+        const int propertyCount = 10;
+        const int objectsCount = 5;
         int[,] tmatr;
 
         public MainWindow()
@@ -51,7 +52,7 @@ namespace SpecialEquipment
                     Title3 = matr[i, 2].ToString(),
                     Title4 = matr[i, 3].ToString(),
                     Title5 = matr[i, 4].ToString(),
-                    Title6 = matr[i, 5].ToString(),
+                    //Title6 = matr[i, 5].ToString(),
                 });
                 dataGrid.Items.Add(objects[i]);
             }
@@ -64,56 +65,48 @@ namespace SpecialEquipment
         }
         public void InitObjects()
         {
-            //двс, колеса, гусеницы, ковш, бур, кузов, цистерна, стрела, выносные опоры
-            listObjects.Add(new ListObjects(){ Name = "Самосвал", Properties = new int[propertyCount] { 1, 1, 0, 0, 0, 1, 0, 0, 0 } });
-            listObjects.Add(new ListObjects(){ Name = "Бензовоз", Properties = new int[propertyCount] { 1, 1, 0, 0, 0, 0, 1, 0, 0 } });
-            listObjects.Add(new ListObjects(){ Name = "Кран-борт", Properties = new int[propertyCount] { 1, 1, 0, 0, 0, 1, 0, 1, 1 } });
-            listObjects.Add(new ListObjects(){ Name = "Бульдозер", Properties = new int[propertyCount] { 1, 0, 1, 1, 0, 0, 0, 0, 0 } });
-            listObjects.Add(new ListObjects(){ Name = "Экскаватор", Properties = new int[propertyCount] { 1, 0, 1, 1, 0, 0, 0, 1, 0 } });
-            listObjects.Add(new ListObjects(){ Name = "Бурильная машина", Properties = new int[propertyCount] { 1, 0, 1, 0, 1, 0, 0, 0, 1 } });
+            //электромотор, двс, колеса, гусеницы, ковш, бур, кузов, цистерна, стрела, выносные опоры, 
+            listObjects.Add(new ListObjects(){ Name = "Самосвал", Properties = new int[propertyCount] { 0, 1, 1, 0, 0, 0, 1, 0, 0, 0 } });
+            listObjects.Add(new ListObjects(){ Name = "Бензовоз", Properties = new int[propertyCount] { 0, 1, 1, 0, 0, 0, 0, 1, 0, 0 } });
+            listObjects.Add(new ListObjects(){ Name = "Бульдозер", Properties = new int[propertyCount] { 0, 1, 0, 1, 1, 0, 0, 0, 0, 0 } });
+            listObjects.Add(new ListObjects(){ Name = "Кран", Properties = new int[propertyCount] { 1, 0, 0, 0, 0, 0, 0, 0, 1, 1 } });
+            listObjects.Add(new ListObjects(){ Name = "Бурильная машина", Properties = new int[propertyCount] { 0, 1, 0, 1, 0, 1, 0, 0, 0, 1 } });
 
-            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[0].Name, Properties = "1-1-0-0-0-1-0-0-0" });
-            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[1].Name, Properties = "1-1-0-0-0-0-1-0-0" });
-            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[2].Name, Properties = "1-1-0-0-0-1-0-1-1" });
-            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[3].Name, Properties = "1-0-1-1-0-0-0-0-0" });
-            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[4].Name, Properties = "1-0-1-1-0-0-0-1-0" });
-            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[5].Name, Properties = "1-0-1-0-1-0-0-0-1" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[0].Name, Properties = "0-1-1-0-0-0-1-0-0-0" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[1].Name, Properties = "0-1-1-0-0-0-0-1-0-0" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[2].Name, Properties = "0-1-0-1-1-0-0-0-0-0" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[3].Name, Properties = "1-0-0-0-0-0-0-0-1-1" });
+            listViewObjects.Add(new ListViewObjects(){ Name = listObjects[4].Name, Properties = "0-1-0-1-0-1-0-0-0-1" });
             foreach (var obj in listViewObjects)
                 listView.Items.Add(obj);
         }
 
         public int[,] CreateMatrix(List<int[]> list)
         {
-            int[,] matrix = new int[propertyCount, list.Count];
+            int[,] matrix = new int[propertyCount, objectsCount];
             for(int i = 0; i < propertyCount; i++)
-                for (int j = 0; j < list.Count; j++)
+                for (int j = 0; j < objectsCount; j++)
                 {
                     matrix[i, j] = 0;
                 }
             return matrix;
         }
 
-        public int[,] TeachMatrix(List<int[]> props, int[,] matr)
+        public int[,] TeachMatrix(List<int[]> objects, int[,] matr)
         {
-            for (int key = 0; key < props.Count; key++)
+            for (int key = 0; key < objectsCount; key++)
                 for (int i = 0; i < propertyCount; i++)
-                    for (int j = 0; j < props.Count; j++)
+                    for (int j = 0; j < objectsCount; j++)
                     {
                         if (j == key)
                         {
-                            matr[i, j] += props[key][i];
-                            if (matr[i, j] < -1)
-                                matr[i, j] = -1;
-                            if (matr[i, j] > 1)
-                                matr[i, j] = 1;
+                            matr[i, j] += objects[key][i];
                         }
                         else
                         {
-                            matr[i, j] -= props[key][i];
-                            if (matr[i, j] < -1)
+                            matr[i, j] -= objects[key][i];
+                            if (matr[i, j] == -2)
                                 matr[i, j] = -1;
-                            if (matr[i, j] > 1)
-                                matr[i, j] = 1;
                         }
                     }
             return matr;
@@ -121,20 +114,20 @@ namespace SpecialEquipment
 
         public string CompareObjects(int[] y)
         {
-            int[] demons = new int[6];
+            int[] demons = new int[objectsCount];
             List<int> maxNumbers = new List<int>();
             string result = "";
             string text = "";
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < objectsCount; i++)
             {
-                for (int j = 0; j < 9; j++)
+                for (int j = 0; j < propertyCount; j++)
                 {
                     demons[i] += tmatr[j, i] * y[j];
                 }
                 text += $"{demons[i]}, ";
             }
             demons_TextBlock.Text = text.Substring(0, text.Length - 2);
-            for (int num = 0; num < 6; num++)
+            for (int num = 0; num < objectsCount; num++)
             {
                 if (demons[num] == demons.Max())
                     maxNumbers.Add(num);  //номера объектов, на которые похож новый объект
@@ -164,10 +157,6 @@ namespace SpecialEquipment
                         if (!result.Contains(listObjects[4].Name))
                             result += "/" + listObjects[4].Name;
                         break;
-                    case 5:
-                        if (!result.Contains(listObjects[5].Name))
-                            result += "/" + listObjects[5].Name;
-                        break;
                 }
             }
             result = result.Remove(0, 1);
@@ -177,6 +166,7 @@ namespace SpecialEquipment
         public int[] GetObjectProperties()
         {
             int[] obj = {
+                electro_check.IsChecked == true ? 1 : 0,
                 engine_check.IsChecked == true ? 1 : 0,
                 wheels_check.IsChecked == true ? 1 : 0,
                 caterpillars_check.IsChecked == true ? 1 : 0,
@@ -197,7 +187,6 @@ namespace SpecialEquipment
             public string Title3 { get; set; }
             public string Title4 { get; set; }
             public string Title5 { get; set; }
-            public string Title6 { get; set; }
         }
 
         public class ListObjects
@@ -223,7 +212,7 @@ namespace SpecialEquipment
 
         private void btn_add_Click(object sender, RoutedEventArgs e)
         {
-            if (listObjects.Count < 6)
+            if (listObjects.Count < objectsCount)
             {
                 if (listObjects.FirstOrDefault(x => x.Name == txtBox_name.Text) == null)
                 {
@@ -256,7 +245,7 @@ namespace SpecialEquipment
                         listViewObjects.Add(newViewObj);
                         listView.Items.Add(newViewObj);
 
-                        if (listObjects.Count == 6)
+                        if (listObjects.Count == objectsCount)
                             btn_teach.IsEnabled = true;
                     }
                     else
@@ -298,7 +287,7 @@ namespace SpecialEquipment
                     }
                 }
                 listView.Items.Remove(itemView);
-                if (listObjects.Count != 6)
+                if (listObjects.Count != objectsCount)
                     btn_teach.IsEnabled = false;
             }
         }
@@ -308,7 +297,7 @@ namespace SpecialEquipment
             listObjects.Clear();
             listViewObjects.Clear();
             listView.Items.Clear();
-            if (listObjects.Count != 6)
+            if (listObjects.Count != objectsCount)
                 btn_teach.IsEnabled = false;
         }
 

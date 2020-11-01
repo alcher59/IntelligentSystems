@@ -26,27 +26,27 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <CheckBox x:Name="engine_check" Content="ДВС" HorizontalAlignment="Left" Margin="10,10,0,1" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="22" Width="58" FontSize="14"/>
-                <CheckBox x:Name="wheels_check" Content="Колёса" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" Height="22" Width="80" FontSize="14"/>
-                <CheckBox x:Name="caterpillars_check" Content="Гусеницы" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Height="22" Width="97" FontSize="14"/>
-                <CheckBox Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Height="22" Width="20"/>
-                <CheckBox x:Name="bucket_check" Content="Ковш" HorizontalAlignment="Left" Margin="10,10,0,1" VerticalAlignment="Center" Grid.Row="3" Grid.ColumnSpan="2" Height="22" Width="67" FontSize="14"/>
-                <CheckBox x:Name="boer_check" Content="Бур" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2" Height="22" Width="51" FontSize="14"/>
-                <CheckBox x:Name="body_check" Content="Кузов" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="5" Grid.ColumnSpan="2" Height="22" Width="70" FontSize="14"/>
-                <CheckBox x:Name="tank_check" Content="Цистерна" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="6" Grid.ColumnSpan="2" Height="22" Width="106" FontSize="14"/>
-                <CheckBox x:Name="jib_check" Content="Стрела" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="7" Grid.ColumnSpan="2" Height="22" Width="85" FontSize="14"/>
-                <CheckBox x:Name="outriggers_check" Content="Выносные опоры" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="8" Grid.ColumnSpan="2" ForceCursor="True" Height="22" Width="158" FontSize="14"/>
+                <CheckBox x:Name="electro_check" Content="Электромотор" HorizontalAlignment="Left" Margin="10,10,0,2" VerticalAlignment="Center" Height="22" Width="155" FontSize="14"/>
+                <CheckBox x:Name="engine_check" Content="ДВС" HorizontalAlignment="Left" Margin="10,10,0,3" VerticalAlignment="Center" Height="22" Width="58" FontSize="14" Grid.Row="1"/>
+                <CheckBox x:Name="wheels_check" Content="Колёса" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Height="22" Width="80" FontSize="14"/>
+                <CheckBox x:Name="caterpillars_check" Content="Гусеницы" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="3" Grid.ColumnSpan="2" Height="22" Width="97" FontSize="14"/>
+                <CheckBox x:Name="bucket_check" Content="Ковш" HorizontalAlignment="Left" Margin="10,10,0,1" VerticalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2" Height="22" Width="67" FontSize="14"/>
+                <CheckBox x:Name="boer_check" Content="Бур" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="5" Grid.ColumnSpan="2" Height="22" Width="51" FontSize="14"/>
+                <CheckBox x:Name="body_check" Content="Кузов" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="6" Grid.ColumnSpan="2" Height="22" Width="70" FontSize="14"/>
+                <CheckBox x:Name="tank_check" Content="Цистерна" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="7" Grid.ColumnSpan="2" Height="22" Width="106" FontSize="14"/>
+                <CheckBox x:Name="jib_check" Content="Стрела" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="8" Grid.ColumnSpan="2" Height="22" Width="85" FontSize="14"/>
+                <CheckBox x:Name="outriggers_check" Content="Выносные опоры" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Grid.Row="9" Grid.ColumnSpan="2" ForceCursor="True" Height="22" Width="158" FontSize="14"/>
             </Grid>
         </GroupBox>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="415" Margin="10,140,0,0" VerticalAlignment="Top" Width="674">
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="415" Margin="44,140,0,0" VerticalAlignment="Top" Width="642">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title1" Binding="{Binding Title1}" />
                 <DataGridTextColumn Header="Title2" Binding="{Binding Title2}" />
                 <DataGridTextColumn Header="Title3" Binding="{Binding Title3}" />
                 <DataGridTextColumn Header="Title4" Binding="{Binding Title4}" />
                 <DataGridTextColumn Header="Title5" Binding="{Binding Title5}" />
-                <DataGridTextColumn Header="Title6" Binding="{Binding Title6}" />
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock HorizontalAlignment="Left" Margin="122,593,0,0" TextWrapping="Wrap" Text="Похоже на:" VerticalAlignment="Top" Width="110"/>
@@ -56,8 +56,8 @@
             <MenuItem Header="Сохранить" Click="MenuItem_Click_1"/>
         </Menu>
         <TextBox x:Name="txtBox_name" Height="32" Margin="0,181,555,0" TextWrapping="Wrap"  MouseEnter="txtBox_name_MouseEnter" MouseLeave="txtBox_name_MouseLeave" Width="314" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-        <Button x:Name="btn_comp" Content="Сравнить" HorizontalAlignment="Left" Margin="716,593,0,0" VerticalAlignment="Top" Width="176" Height="33" Background="White" Click="btn_comp_Click"/>
-        <Button x:Name="btn_add" Content="Добавить" HorizontalAlignment="Left" Margin="904,593,0,0" VerticalAlignment="Top" Width="178" Height="33" Background="White" Click="btn_add_Click"/>
+        <Button x:Name="btn_comp" Content="Сравнить" HorizontalAlignment="Left" Margin="716,596,0,0" VerticalAlignment="Top" Width="176" Height="33" Background="White" Click="btn_comp_Click"/>
+        <Button x:Name="btn_add" Content="Добавить" HorizontalAlignment="Left" Margin="904,596,0,0" VerticalAlignment="Top" Width="178" Height="33" Background="White" Click="btn_add_Click"/>
         <ListView x:Name="listView" HorizontalAlignment="Left" Height="448" Margin="1110,140,0,0" VerticalAlignment="Top" Width="482">
             <ListView.View>
                 <GridView>
