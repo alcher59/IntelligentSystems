@@ -26,7 +26,7 @@ namespace Dog
             SetSum();
         }
 
-        const int p1 = 1, p2 = 1, p3 = 0; //пороги
+        const int p1 = 1, p2 = 2, p3 = 0; //пороги
 
         int s1 = 0, s2 = 0, s3 = 0; //сумматоры
 
@@ -37,7 +37,7 @@ namespace Dog
         public void SetSum()
         {
             s1 = x1;
-            if (s1 == p1)
+            if (s1 >= p1)
             {
                 res1.Background = new SolidColorBrush(Colors.LightGreen);
                 n1.Fill = new SolidColorBrush(Colors.Red);
@@ -49,8 +49,8 @@ namespace Dog
                 n1.Fill = new SolidColorBrush(Colors.White);
                 y1 = 0;
             }
-            s2 = x2 + x3;
-            if (s2 == p2)
+            s2 = 2 * x2 - 1 * x3;
+            if (s2 >= p2)
             {
                 res2.Background = new SolidColorBrush(Colors.LightGreen);
                 n2.Fill = new SolidColorBrush(Colors.Red);
@@ -62,8 +62,8 @@ namespace Dog
                 n2.Fill = new SolidColorBrush(Colors.White);
                 y2 = 0;
             }
-            s3 = y1 + y2;
-            if (s3 == p3)
+            s3 = -1 * y1 - 1 * y2;
+            if (s3 >= p3)
             {
                 res3.Background = new SolidColorBrush(Colors.LightGreen);
                 n3.Fill = new SolidColorBrush(Colors.Red);
@@ -112,7 +112,7 @@ namespace Dog
             if (x3 == 0)
             {
                 btn3.Background = new SolidColorBrush(Colors.LightGreen);
-                x3 = -1;
+                x3 = 1;
             }
             else
             {

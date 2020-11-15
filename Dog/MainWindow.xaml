@@ -29,7 +29,7 @@
         <Ellipse x:Name="n2" Fill="White" HorizontalAlignment="Left" Height="30" Margin="260,140,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
         <Ellipse x:Name="n3" Fill="White" HorizontalAlignment="Left" Height="30" Margin="370,197,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
         <Label Content="0" HorizontalAlignment="Left" Margin="377,201,0,0" VerticalAlignment="Top" Height="23" Width="23" FontSize="10" Grid.Column="1"/>
-        <Label Content=" 1" HorizontalAlignment="Left" Margin="265,144,0,0" VerticalAlignment="Top" Height="20" Width="19" FontSize="10" Grid.Column="1"/>
+        <Label Content="2" HorizontalAlignment="Left" Margin="267,144,0,0" VerticalAlignment="Top" Height="21" Width="20" FontSize="10" Grid.Column="1"/>
         <Ellipse x:Name="n1" Fill="White" HorizontalAlignment="Left" Height="30" Margin="260,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
         <Label Content=" 1" HorizontalAlignment="Left" Margin="265,84,0,0" VerticalAlignment="Top" Height="20" Width="20" FontSize="10" Grid.Column="1"/>
     </Grid>

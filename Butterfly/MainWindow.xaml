@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Butterfly"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Бабочка" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="89*"/>
+            <ColumnDefinition Width="703*"/>
+        </Grid.ColumnDefinitions>
+        <Line X1="0" Y1="5" X2="200" Y2="5" Stroke="Red" Margin="414,200,178,203" Grid.Column="1" />
+        <Line X1="0" Y1="5" X2="200" Y2="115" Stroke="Red" Margin="250,122,316,214" Grid.Column="1" />
+        <Line X1="0" Y1="5" X2="200" Y2="5" Stroke="Red" Margin="117,273,475,130" Grid.Column="1" />
+        <Line X1="0" Y1="200" X2="140" Y2="0" Stroke="Red" Margin="117,77,475,136" Grid.Column="1" />
+        <Line X1="0" Y1="5" X2="200" Y2="5" Stroke="Red" Margin="117,122,475,281" Grid.Column="1" />
+        <ToggleButton x:Name="sun" Content="Солнце" HorizontalAlignment="Left" Margin="47,258,0,0" VerticalAlignment="Top" Width="159" Height="35" Grid.ColumnSpan="2" Background="White" AutomationProperties.Name="sun" Click="sun_Click"/>
+        <ToggleButton x:Name="temp" Content="Temp &gt; 36" HorizontalAlignment="Left" Margin="47,108,0,0" VerticalAlignment="Top" Width="159" Height="35" Grid.ColumnSpan="2" Background="White" AutomationProperties.Name="temp" Click="temp_Click"/>
+        <Ellipse x:Name="n3" Grid.Column="1" Fill="White" HorizontalAlignment="Left" Height="30" Margin="385,189,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" AutomationProperties.Name="n3"/>
+        <ToggleButton x:Name="res" Content="Крылья раскрыты" HorizontalAlignment="Left" Margin="511,184,0,0" VerticalAlignment="Top" Width="159" Height="35" Background="White" Grid.Column="1" AutomationProperties.Name="res"/>
+        <Ellipse x:Name="n1" Grid.Column="1" Fill="White" HorizontalAlignment="Left" Height="30" Margin="221,113,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" AutomationProperties.Name="n1"/>
+        <Ellipse x:Name="n2" Grid.Column="1" Fill="White" HorizontalAlignment="Left" Height="30" Margin="221,263,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" AutomationProperties.Name="n2"/>
+        <Label Content="2" Grid.Column="1" HorizontalAlignment="Left" Margin="228,265,0,0" VerticalAlignment="Top" Height="31" Width="22"/>
+        <Label Content="4" Grid.Column="1" HorizontalAlignment="Left" Margin="392,190,0,0" VerticalAlignment="Top" Height="31" Width="22"/>
+        <RadioButton x:Name="e1" Content="Ошибка 1 рода" HorizontalAlignment="Left" Margin="47,361,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="e1_Click"/>
+        <RadioButton x:Name="e2" Content="Ошибка 2 рода" HorizontalAlignment="Left" Margin="47,381,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="e2_Click"/>
+        <RadioButton x:Name="e0" Content="Нет ошибок" HorizontalAlignment="Left" Margin="47,341,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" IsChecked="True" Click="e0_Click"/>
+        <Label Content="2" Grid.Column="1" HorizontalAlignment="Left" Margin="228,114,0,0" VerticalAlignment="Top" Height="31" Width="22"/>
+        <Line X1="0" Y1="50" X2="105" Y2="202" Stroke="Red" Margin="117,77,475,136" Grid.Column="1" />
+        <Line X1="0" Y1="73" X2="150" Y2="0" Stroke="Red" Margin="250,205,316,130" Grid.Column="1" />
     </Grid>
 </Window>
