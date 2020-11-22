@@ -41,6 +41,7 @@ namespace Neuron
                         k3 = k3 + dk3;
                     }
                     Console.WriteLine($"\n            (Шаг {j + 1})           ");
+                    Console.WriteLine($"\nx1 = {x1[j]};  x2 = { x2[j]};  x3 = {x3[j]}");
                     Console.WriteLine("s = " + Math.Round(s, 4) + "    y = " + y[j] + "    net = " + net);
                     Console.WriteLine("k1: " + Math.Round(k1, 4) + "    k2: " + Math.Round(k2, 4) + "   k3: " + Math.Round(k3, 4));
                 }
